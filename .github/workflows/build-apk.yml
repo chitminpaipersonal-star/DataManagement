@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # ဖုန်းကနေ ခလုတ်နှိပ်ပြီး ကိုယ်တိုင် Build ချင်ရင် သုံးဖို့
+  workflow_dispatch:
 
 jobs:
   build:
@@ -47,3 +47,4 @@ jobs:
           name: my-android-app
           path: |
             **/build/outputs/apk/debug/*.apk
+            
