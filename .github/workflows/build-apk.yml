@@ -21,12 +21,17 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Setup Android SDK
+      - name: Setup Android SDK Tools
         uses: android-actions/setup-android@v3
+        with:
+          log-accepted-android-sdk-licenses: false
 
-      - name: Accept Android SDK Licenses
+      - name: Auto Accept Licenses
         run: |
-          yes | sdkmanager --licenses || true
+          mkdir -p ${ANDROID_HOME}/licenses
+          echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb7434029502224e8d80\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c241d8c1f757b86af09d7f6c17439d40\n621085764034346bb68c4d29fe341e0506aa9f4c" > ${ANDROID_HOME}/licenses/android-sdk-license
+          echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c241d8c1f757b86af09d7f6c17439d40" > ${ANDROID_HOME}/licenses/android-googletv-license
+          echo -e "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > ${ANDROID_HOME}/licenses/android-sdk-preview-license
 
       - name: Make Gradle Executable
         run: |
